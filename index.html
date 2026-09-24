@@ -1,1 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nijanthan - WordPress Developer</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Nijanthan-Favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#eaddf1',
+                            dark: '#3c2641',
+                            beige: '#f5f0e6',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #eaddf1; }
+        ::-webkit-scrollbar-thumb { background: #3c2641; border-radius: 4px; }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Scroll reveal animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered delays for list items */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .woo-logo {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(900%) hue-rotate(270deg) brightness(85%);
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-dark bg-brand-purple antialiased selection:bg-brand-dark selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="absolute top-0 left-0 w-full z-50 py-4 px-5 md:py-6 md:px-12 lg:px-24 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="block z-50 relative">
+            <img src="C:\Users\admin\Downloads\Portfolio\Media\Nijanthan-logo.png" alt="Nijanthan Logo" class="h-8 md:h-10 w-auto shadow-sm hover:opacity-90 transition-all rounded">
+        </a>
+
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex gap-8 text-xs font-semibold tracking-wider uppercase">
+            <li><a href="#" class="hover:text-opacity-70 transition-colors">Home</a></li>
+            <li><a href="#about" class="hover:text-opacity-70 transition-colors">About</a></li>
+            <li><a href="#skills" class="hover:text-opacity-70 transition-colors">Skills</a></li>
+            <li><a href="#portfolio" class="hover:text-opacity-70 transition-colors">Portfolio</a></li>
+            <li><a href="#contact" class="hover:text-opacity-70 transition-colors">Contact Me</a></li>
+        </ul>
+
+        <!-- Right Action (Desktop) -->
+        <a href="#contact" class="hidden md:block text-xs font-bold uppercase tracking-wider underline hover:text-opacity-70 transition-colors z-50 relative">
+            Let's Talk
+        </a>
+
+        <!-- Hamburger Icon (Mobile) -->
+        <button id="hamburger-btn" class="md:hidden text-2xl text-brand-dark z-50 relative focus:outline-none p-2">
+            <i class="fas fa-bars transition-transform duration-300" id="hamburger-icon"></i>
+        </button>
+
+        <!-- Fullscreen Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-purple z-40 flex flex-col items-center justify-center gap-8 opacity-0 invisible">
+            <ul class="flex flex-col items-center gap-8 text-xl font-bold tracking-wider uppercase">
+                <li><a href="#" class="mobile-link hover:text-brand-dark/70 transition-colors">Home</a></li>
+                <li><a href="#skills" class="mobile-link hover:text-brand-dark/70 transition-colors">Skills</a></li>
+                <li><a href="#portfolio" class="mobile-link hover:text-brand-dark/70 transition-colors">Portfolio</a></li>
+                <li><a href="#contact" class="mobile-link text-white bg-brand-dark px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors">Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="min-h-[100svh] pt-28 pb-16 px-5 md:px-12 lg:px-24 flex flex-col justify-center">
+        <!-- Title Area -->
+        <div class="text-center mb-12 md:mb-16 reveal-up">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-tight mb-2 leading-tight">Nijanthan</h1>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-6">WordPress Developer</h2>
+            <div class="flex items-center justify-center gap-4 text-[10px] md:text-xs font-medium uppercase tracking-widest text-brand-dark/70">
+                <a href="https://www.linkedin.com/in/nijanthan-k-7b984721b/" target="_blank" class="hover:text-brand-dark transition-colors">LinkedIn <i class="fas fa-arrow-right-long text-[8px] md:text-[10px] ml-1"></i></a>
+                <span class="w-1 h-1 rounded-full bg-brand-dark/50"></span>
+                <a href="https://github.com/Nijanthann" target="_blank" class="hover:text-brand-dark transition-colors">Github <i class="fas fa-arrow-right-long text-[8px] md:text-[10px] ml-1"></i></a>
+            </div>
+        </div>
+
+        <!-- Content Split -->
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 items-center">
+            
+            <!-- Left Info -->
+            <div class="flex flex-col gap-6 lg:gap-8 order-2 lg:order-1 items-center lg:items-start text-center lg:text-left reveal-up delay-100">
+                <p class="text-sm md:text-base text-brand-dark/80 max-w-sm leading-relaxed px-4 lg:px-0">
+                    I build responsive WordPress websites, WooCommerce stores and practical digital solutions that turn business ideas into reliable online experiences.
+                </p>
+                
+                <a href="#contact" class="bg-brand-dark text-white px-8 py-3 text-sm font-semibold uppercase tracking-wider hover:bg-brand-dark/90 transition-all hover:-translate-y-1 shadow-lg shadow-brand-dark/20 flex items-center gap-3 group rounded-sm">
+                    Hire Me <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                
+                <div class="flex flex-col gap-2 mt-4 lg:mt-0">
+                    <p class="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]">Client Feedback</p>
+                    <div class="flex gap-1 text-[#F59E0B] text-sm justify-center lg:justify-start">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-xs text-brand-dark/70 max-w-[200px] mt-1 hidden lg:block">Trusted by clients for quality and reliable web development.</p>
+                </div>
+            </div>
+
+            <!-- Center Image -->
+            <div class="flex justify-center order-1 lg:order-2 reveal-up">
+                <div class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-[4px] lg:border-[6px] border-brand-beige shadow-xl group bg-white/50">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\Nijanthan-K.png" alt="Nijanthan" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+            </div>
+
+            <!-- Right Stats (Updated based on request) -->
+            <div class="flex flex-row lg:flex-col justify-center gap-6 sm:gap-10 order-3 items-center text-center flex-wrap reveal-up delay-200">
+                <div class="flex flex-col items-center">
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-1">53+</h3>
+                    <p class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] text-brand-dark/70">Happy Clients</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-1">10+</h3>
+                    <p class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] text-brand-dark/70">Business Projects</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-1">1</h3>
+                    <p class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] text-brand-dark/70">Year Guarantee</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills & Experience Section -->
+    <section id="skills" class="bg-white py-16 md:py-24 px-5 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
+            
+            <!-- Skills Column -->
+            <div class="reveal-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 md:mb-8 relative inline-block">
+                    Skills & Experience
+                </h2>
+                
+                <div class="mb-10 md:mb-12 border-l-2 border-brand-dark pl-5 md:pl-6 ml-1 md:ml-2">
+                    <p class="text-brand-dark/80 text-sm md:text-base leading-relaxed">
+                        I combine WordPress development, frontend technologies and hosting knowledge to create websites that are responsive, functional, maintainable and aligned with real business goals.
+                    </p>
+                </div>
+
+                <h3 class="text-xl font-bold mb-6">Skills</h3>
+                
+                <!-- Updated Grid: Added CSS, tailored for mobile -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    <!-- WordPress -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-wordpress text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">WordPress</span>
+                    </div>
+                    <!-- Elementor -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-elementor text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">Elementor</span>
+                    </div>
+                    <!-- WooCommerce -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <img src="C:\Users\admin\Downloads\Portfolio\Media\Woo_logo_color.png" alt="WooCommerce"class="woo-logo w-18 h-18 object-contain mb-3 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">WooCommerce</span>
+                    </div>
+                    <!-- Figma -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-figma text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">Figma</span>
+                    </div>
+                    <!-- HTML -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-html5 text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">HTML</span>
+                    </div>
+                    <!-- CSS (New) -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-css3-alt text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">CSS</span>
+                    </div>
+                    <!-- JavaScript -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-js text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">JavaScript</span>
+                    </div>
+                    <!-- GitHub -->
+                    <div class="bg-brand-beige rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent hover:border-brand-dark/10">
+                        <i class="fab fa-github text-4xl mb-3 text-brand-dark group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center">GitHub</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Column -->
+            <div class="lg:pt-0 reveal-up delay-100">
+                <h3 class="text-2xl font-bold mb-8 md:mb-10">Experience</h3>
+                
+                <div class="flex flex-col">
+                    <!-- Exp Item 1 -->
+                    <div class="py-5 md:py-6 border-b border-gray-200 group hover:bg-brand-beige/50 px-2 sm:px-4 -mx-2 sm:-mx-4 rounded-xl transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+                                <span class="border border-brand-dark/30 rounded-full px-4 py-1 text-[10px] md:text-xs font-bold whitespace-nowrap w-fit">JAN 2024 - PRESENT</span>
+                                <h4 class="text-base md:text-lg font-bold group-hover:text-brand-dark transition-colors">Web Developer</h4>
+                            </div>
+                            <p class="text-xs md:text-sm font-medium text-brand-dark/60 sm:text-right italic">Brandingbeez</p>
+                        </div>
+                        <p class="text-xs md:text-sm text-brand-dark/65 leading-relaxed max-w-2xl">Develop and maintain WordPress websites for clients across different industries. Work includes Elementor, WooCommerce, responsive development, custom layouts, plugin configuration, troubleshooting, website migrations, hosting management and ongoing improvements.</p>
+                    </div>
+
+                    <!-- Exp Item 2 -->
+                    <div class="py-5 md:py-6 border-b border-gray-200 group hover:bg-brand-beige/50 px-2 sm:px-4 -mx-2 sm:-mx-4 rounded-xl transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+                                <span class="border border-brand-dark/30 rounded-full px-4 py-1 text-[10px] md:text-xs font-bold whitespace-nowrap w-fit">OCT 2023 - JAN 2024</span>
+                                <h4 class="text-base md:text-lg font-bold group-hover:text-brand-dark transition-colors">Social Media Intern</h4>
+                            </div>
+                            <p class="text-xs md:text-sm font-medium text-brand-dark/60 sm:text-right italic">Brandingbeez</p>
+                        </div>
+                        <p class="text-xs md:text-sm text-brand-dark/65 leading-relaxed max-w-2xl">Worked on social media content, campaigns, branding activities and client communication before transitioning into web development.</p>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="py-5 md:py-6 px-2 sm:px-4 -mx-2 sm:-mx-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-brand-dark/50">Education</span>
+                                <h4 class="text-base md:text-lg font-bold mt-1">M.Sc Software Systems</h4>
+                            </div>
+                            <p class="text-xs md:text-sm font-medium text-brand-dark/60 sm:text-right italic">Software Systems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+
+    <!-- Why Work With Me Section -->
+    <section class="bg-brand-purple py-16 md:py-24 px-5 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-2xl mb-12 md:mb-16 reveal-up">
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-3">Why Work With Me</p>
+                <h2 class="text-3xl md:text-4xl font-bold">More than just building websites.</h2>
+                <p class="text-sm md:text-base text-brand-dark/65 leading-relaxed mt-5">I focus on creating websites that are practical, maintainable and aligned with the way a business actually works. 
+                    <br><br>Working with clients across India, the United Kingdom, United States, Germany, and Canada, I’ve gained experience building websites for different industries, audiences, and business requirements.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+                <div class="bg-brand-beige rounded-2xl p-6 md:p-7 reveal-up">
+                    <span class="text-xs font-bold tracking-wider">01</span>
+                    <h3 class="text-lg font-bold mt-6 mb-3">WordPress Expertise</h3>
+                    <p class="text-sm text-brand-dark/65 leading-relaxed">Hands-on experience with WordPress, Elementor, WooCommerce, ACF, themes, plugins and custom website solutions.</p>
+                </div>
+                <div class="bg-brand-beige rounded-2xl p-6 md:p-7 reveal-up delay-100">
+                    <span class="text-xs font-bold tracking-wider">02</span>
+                    <h3 class="text-lg font-bold mt-6 mb-3">Problem Solving</h3>
+                    <p class="text-sm text-brand-dark/65 leading-relaxed">From plugin conflicts and responsive issues to hosting, DNS, migrations, and performance problems.</p>
+                </div>
+                <div class="bg-brand-beige rounded-2xl p-6 md:p-7 reveal-up delay-200">
+                    <span class="text-xs font-bold tracking-wider">03</span>
+                    <h3 class="text-lg font-bold mt-6 mb-3">Business Focused</h3>
+                    <p class="text-sm text-brand-dark/65 leading-relaxed">I build with the goal in mind - whether that means generating enquiries, selling products or showcasing services.</p>
+                </div>
+                <div class="bg-brand-beige rounded-2xl p-6 md:p-7 reveal-up delay-300">
+                    <span class="text-xs font-bold tracking-wider">04</span>
+                    <h3 class="text-lg font-bold mt-6 mb-3">Ongoing Support</h3>
+                    <p class="text-sm text-brand-dark/65 leading-relaxed">From launch to maintenance, I can help with updates, optimization, troubleshooting and future improvements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Work Section -->
+    <section id="portfolio" class="bg-brand-beige py-16 md:py-24 px-5 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Section Header -->
+            <div class="flex items-center gap-4 md:gap-6 mb-12 md:mb-16 reveal-up">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Selected Work</h2>
+                    <p class="text-sm text-brand-dark/60 mt-2 max-w-xl">A selection of WordPress websites, eCommerce experiences and digital solutions I have developed and maintained.</p>
+                </div>
+                <div class="h-px bg-brand-dark/20 flex-grow"></div>
+            </div>
+
+            <!-- Portfolio Grid (Mobile single col, Desktop grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+                
+                <!-- Project 1: Green Paradise TX -->
+                <a href="https://greenparadisetx.com/" target="_blank" rel="noopener noreferrer" class="reveal-up group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\Greenparadise.webp" alt="Green Paradise TX" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-white font-bold text-xl md:text-2xl mb-2">Green Paradise TX</h3>
+                            <p class="text-brand-purple font-bold tracking-wider uppercase text-[10px] md:text-xs flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 2: The Door Fitting -->
+                <a href="https://thedoorfittingcompany.co.uk/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\The Door Fitting.png" alt="The Door Fitting" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-white font-bold text-xl md:text-2xl mb-2">The Door Fitting</h3>
+                            <p class="text-brand-purple font-bold tracking-wider uppercase text-[10px] md:text-xs flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3: Beau Rivage Bungalow -->
+                <a href="https://beaurivagebungalow.co.uk/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-200 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\Beau Rivage.png" alt="Beau Rivage Bungalow" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-white font-bold text-xl md:text-2xl mb-2">Beau Rivage Bungalow</h3>
+                            <p class="text-brand-purple font-bold tracking-wider uppercase text-[10px] md:text-xs flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4: Valhalla Lanes -->
+                <a href="https://valhalla-lanes.co.uk/" target="_blank" rel="noopener noreferrer" class="reveal-up group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\Valhalla Lanes.png" alt="Valhalla Lanes" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-white font-bold text-xl md:text-2xl mb-2">Valhalla Lanes</h3>
+                            <p class="text-brand-purple font-bold tracking-wider uppercase text-[10px] md:text-xs flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5: VIMS CBE -->
+                <a href="https://vimscbe.ac.in/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\VIMS.png" alt="VIMS CBE" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-white font-bold text-xl md:text-2xl mb-2">VIMS CBE</h3>
+                            <p class="text-brand-purple font-bold tracking-wider uppercase text-[10px] md:text-xs flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 6: Vellu Laser -->
+                <a href="https://lp.vellulaser.com/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                    <img src="C:\Users\admin\Downloads\Portfolio\Media\Vellu Laser.png" alt="Vellu Laser" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-white font-bold text-xl md:text-2xl mb-2">Vellu Laser</h3>
+                            <p class="text-brand-purple font-bold tracking-wider uppercase text-[10px] md:text-xs flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer / Contact Section -->
+    <footer id="contact" class="bg-brand-dark text-white pt-20 md:pt-24 pb-10 px-5 md:px-12 lg:px-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-white/10 pb-12 md:pb-16 mb-8 gap-12 reveal-up">
+            
+            <!-- Left Info -->
+            <div class="flex flex-col gap-8 md:gap-10 w-full lg:w-auto">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">Let's build something that works.</h2>
+                
+                <p class="text-sm md:text-base text-white/65 max-w-lg leading-relaxed">Have a project in mind? Whether you need a new WordPress website, an eCommerce store, a redesign, or help fixing an existing site, let's talk.</p>
+
+                <div class="w-24 md:w-32 h-px bg-white/20"></div>
+
+                <div class="flex flex-col sm:flex-row lg:flex-col gap-8 sm:gap-12 lg:gap-6">
+                    <!-- Email -->
+                    <div class="flex items-center gap-4 md:gap-5">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center text-brand-beige text-lg md:text-xl shrink-0 backdrop-blur-sm">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-[0.2em] text-white/50 mb-1">Email</p>
+                            <a href="mailto:nijanthan.kannan18@gmail.com" class="text-sm md:text-base font-medium hover:text-brand-purple transition-colors break-all">nijanthan.kannan18@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="flex items-center gap-4 md:gap-5">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center text-brand-beige text-lg md:text-xl shrink-0 backdrop-blur-sm">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-[0.2em] text-white/50 mb-1">Location</p>
+                            <p class="text-sm md:text-base font-medium">Coimbatore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right CTA -->
+            <div class="flex flex-col items-center gap-4 md:gap-6 w-full lg:w-auto mt-4 lg:mt-0">
+                <a href="mailto:nijanthan.kannan18@gmail.com" class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center text-brand-dark text-4xl md:text-5xl hover:scale-105 hover:bg-brand-purple transition-all shadow-xl shadow-black/20 group">
+                    <i class="fas fa-arrow-right -rotate-45 group-hover:-translate-y-2 group-hover:translate-x-2 transition-transform duration-300"></i>
+                </a>
+                <p class="font-bold text-base md:text-lg text-brand-beige">👋 Let's Talk</p>
+            </div>
+            
+        </div>
+
+        <!-- Bottom Copyright / Social -->
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-white/40">&copy; <script>document.write(new Date().getFullYear());</script> Nijanthan. All rights reserved.</p>
+            <div class="flex gap-4">
+                <a href="https://www.linkedin.com/in/nijanthan-k-7b984721b/" target="_blank" aria-label="LinkedIn" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 hover:text-white text-white/60 transition-colors">
+                    <i class="fab fa-linkedin-in text-sm"></i>
+                </a>
+                <a href="https://github.com/Nijanthann" target="_blank" aria-label="Github" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 hover:text-white text-white/60 transition-colors">
+                    <i class="fab fa-github text-sm"></i>
+                </a>
+                <a href="https://www.instagram.com/nijanthan.__" aria-label="Instagram" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 hover:text-white text-white/60 transition-colors">
+                    <i class="fab fa-instagram text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle Logic
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                
+                if(isMenuOpen) {
+                    // Open Menu
+                    mobileMenu.classList.remove('invisible');
+                    // slight delay to allow display block to take effect before animating opacity
+                    setTimeout(() => {
+                        mobileMenu.classList.remove('opacity-0');
+                    }, 10);
+                    
+                    // Change icon to close (X)
+                    hamburgerIcon.classList.remove('fa-bars');
+                    hamburgerIcon.classList.add('fa-times');
+                    
+                    // Prevent body scrolling
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    // Close Menu
+                    mobileMenu.classList.add('opacity-0');
+                    
+                    setTimeout(() => {
+                        mobileMenu.classList.add('invisible');
+                    }, 300); // matches transition duration
+                    
+                    // Change icon back to hamburger
+                    hamburgerIcon.classList.remove('fa-times');
+                    hamburgerIcon.classList.add('fa-bars');
+                    
+                    // Restore body scrolling
+                    document.body.style.overflow = '';
+                }
+            }
+
+            hamburgerBtn.addEventListener('click', toggleMenu);
+            
+            // Close menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(isMenuOpen) toggleMenu();
+                });
+            });
+
+            // 2. Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger when 15% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add class to trigger animation
+                        entry.target.classList.add('is-visible');
+                        // Optional: Unobserve after animating once
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Select all elements with the reveal-up class
+            const revealElements = document.querySelectorAll('.reveal-up');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
