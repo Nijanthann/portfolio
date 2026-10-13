@@ -6,7 +6,7 @@
     <title>Nijanthan - WordPress Developer</title>
     <meta name="description" content="Portfolio of Nijanthan, a WordPress & WooCommerce Developer specializing in custom, responsive, and performance-focused business websites.">
 
-    <!-- Anti-Flash Script (Runs immediately before render) -->
+    <!-- Anti-Flash Script (Runs before render to prevent theme flickering) -->
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -44,7 +44,6 @@
                             purple: '#eaddf1',
                             dark: '#3c2641',
                             beige: '#f5f0e6',
-                            // Custom dark palette accents
                             deep: '#120d16',
                             surface: '#1e1424',
                             surfaceLight: '#281b30',
@@ -87,11 +86,6 @@
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
 
-        /* Mobile menu transition */
-        #mobile-menu {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
         /* Asset color adaption */
         .woo-logo {
             filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(900%) hue-rotate(270deg) brightness(85%);
@@ -100,63 +94,70 @@
         .dark .woo-logo {
             filter: brightness(0) invert(1) opacity(0.9);
         }
+
+        /* Dark Mode Purple Glow & Border Illumination */
+        .dark .glow-card {
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark .glow-card:hover {
+            border-color: rgba(192, 132, 252, 0.55) !important;
+            box-shadow: 0 0 30px -4px rgba(168, 85, 247, 0.32), 
+                        0 0 10px -2px rgba(192, 132, 252, 0.25),
+                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.08) !important;
+            background: radial-gradient(circle at 50% 0%, rgba(107, 33, 168, 0.32) 0%, rgba(30, 20, 36, 0.98) 75%) !important;
+        }
+
+        /* Portfolio Cards Glow in Dark Mode */
+        .dark .portfolio-card-glow {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark .portfolio-card-glow:hover {
+            border-color: rgba(192, 132, 252, 0.6) !important;
+            box-shadow: 0 0 35px -5px rgba(168, 85, 247, 0.38), 
+                        0 0 14px rgba(192, 132, 252, 0.22) !important;
+        }
     </style>
 </head>
 <body class="font-sans text-brand-dark dark:text-purple-100 bg-brand-purple/40 dark:bg-brand-deep antialiased selection:bg-brand-dark dark:selection:bg-brand-purple selection:text-white dark:selection:text-brand-dark overflow-x-hidden transition-colors duration-300">
 
-    <!-- Navbar -->
-    <nav class="absolute top-0 left-0 w-full z-50 py-4 px-5 md:py-6 md:px-12 lg:px-24 flex items-center justify-between">
-        <!-- Logo -->
-        <a href="#" class="block z-50 relative">
-            <img src="Media/Nijanthan-logo.png" alt="Nijanthan Logo" class="h-8 md:h-10 w-auto shadow-sm hover:opacity-90 transition-all rounded">
-        </a>
-
-        <!-- Desktop Menu -->
-        <ul class="hidden md:flex gap-8 text-xs font-semibold tracking-wider uppercase text-brand-dark dark:text-purple-200">
-            <li><a href="#" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Home</a></li>
-            <li><a href="#about" class="hover:text-opacity-70 dark:hover:text-white transition-colors">About</a></li>
-            <li><a href="#skills" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Skills</a></li>
-            <li><a href="#portfolio" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Portfolio</a></li>
-            <li><a href="#contact" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Contact Me</a></li>
-        </ul>
-
-        <!-- Right Side Nav Actions -->
-        <div class="flex items-center gap-3 md:gap-5 z-50 relative">
-            
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" type="button" aria-label="Toggle color theme" 
-                class="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-white/70 dark:bg-brand-surface border border-brand-dark/15 dark:border-brand-borderDark text-brand-dark dark:text-amber-300 hover:scale-105 active:scale-95 transition-all shadow-sm">
-                <!-- Moon icon (shows in light mode) -->
-                <i class="fas fa-moon text-sm md:text-base inline-block dark:hidden"></i>
-                <!-- Sun icon (shows in dark mode) -->
-                <i class="fas fa-sun text-sm md:text-base hidden dark:inline-block"></i>
-            </button>
-
-            <!-- Desktop 'Let's Talk' -->
-            <a href="#contact" class="hidden md:block text-xs font-bold uppercase tracking-wider underline text-brand-dark dark:text-purple-200 hover:text-opacity-70 dark:hover:text-white transition-colors">
-                Let's Talk
+    <!-- Fixed Header / Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 py-3 px-5 md:py-4 md:px-12 lg:px-24 bg-brand-purple/80 dark:bg-brand-deep/85 backdrop-blur-md border-b border-brand-dark/5 dark:border-brand-borderDark/40 transition-colors duration-300">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="block z-50 relative">
+                <img src="Media/Nijanthan-logo.png" alt="Nijanthan Logo" class="h-8 md:h-10 w-auto shadow-sm hover:opacity-90 transition-all rounded">
             </a>
 
-            <!-- Mobile Hamburger Button -->
-            <button id="hamburger-btn" aria-label="Toggle navigation menu" class="md:hidden text-2xl text-brand-dark dark:text-purple-100 focus:outline-none p-1">
-                <i class="fas fa-bars transition-transform duration-300" id="hamburger-icon"></i>
-            </button>
-        </div>
-
-        <!-- Fullscreen Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-brand-purple dark:bg-brand-surface z-40 flex flex-col items-center justify-center gap-8 opacity-0 invisible transition-all duration-300">
-            <ul class="flex flex-col items-center gap-8 text-xl font-bold tracking-wider uppercase text-brand-dark dark:text-purple-100">
-                <li><a href="#" class="mobile-link hover:text-brand-dark/70 dark:hover:text-purple-300 transition-colors">Home</a></li>
-                <li><a href="#about" class="mobile-link hover:text-brand-dark/70 dark:hover:text-purple-300 transition-colors">About</a></li>
-                <li><a href="#skills" class="mobile-link hover:text-brand-dark/70 dark:hover:text-purple-300 transition-colors">Skills</a></li>
-                <li><a href="#portfolio" class="mobile-link hover:text-brand-dark/70 dark:hover:text-purple-300 transition-colors">Portfolio</a></li>
-                <li><a href="#contact" class="mobile-link text-white bg-brand-dark dark:bg-brand-accent dark:text-brand-deep px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors">Contact Me</a></li>
+            <!-- Desktop Menu (Hidden on Mobile) -->
+            <ul class="hidden md:flex gap-8 text-xs font-semibold tracking-wider uppercase text-brand-dark dark:text-purple-200">
+                <li><a href="#" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Home</a></li>
+                <li><a href="#about" class="hover:text-opacity-70 dark:hover:text-white transition-colors">About</a></li>
+                <li><a href="#skills" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Skills</a></li>
+                <li><a href="#portfolio" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Portfolio</a></li>
+                <li><a href="#contact" class="hover:text-opacity-70 dark:hover:text-white transition-colors">Contact Me</a></li>
             </ul>
-        </div>
-    </nav>
+
+            <!-- Right Actions (Theme Toggle for all devices; Let's Talk on desktop) -->
+            <div class="flex items-center gap-3 md:gap-5 z-50 relative">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" type="button" aria-label="Toggle color theme" 
+                    class="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-white/70 dark:bg-brand-surface border border-brand-dark/15 dark:border-brand-borderDark text-brand-dark dark:text-amber-300 hover:scale-105 active:scale-95 transition-all shadow-sm">
+                    <i class="fas fa-moon text-sm md:text-base inline-block dark:hidden"></i>
+                    <i class="fas fa-sun text-sm md:text-base hidden dark:inline-block"></i>
+                </button>
+
+                <!-- Desktop 'Let's Talk' -->
+                <a href="#contact" class="hidden md:block text-xs font-bold uppercase tracking-wider underline text-brand-dark dark:text-purple-200 hover:text-opacity-70 dark:hover:text-white transition-colors">
+                    Let's Talk
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero / About Section -->
-    <section id="about" class="min-h-[100svh] pt-28 pb-16 px-5 md:px-12 lg:px-24 flex flex-col justify-center">
+    <section id="about" class="min-h-[100svh] pt-32 pb-16 px-5 md:px-12 lg:px-24 flex flex-col justify-center">
         <!-- Title Area -->
         <div class="text-center mb-12 md:mb-16 reveal-up">
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-tight mb-2 leading-tight dark:text-white">Nijanthan</h1>
@@ -190,9 +191,9 @@
                 </div>
             </div>
 
-            <!-- Center Image -->
+            <!-- Center Image (With Dark Halo) -->
             <div class="flex justify-center order-1 lg:order-2 reveal-up">
-                <div class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-[4px] lg:border-[6px] border-brand-beige dark:border-brand-borderDark shadow-xl group bg-white/50 dark:bg-brand-surface">
+                <div class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-[4px] lg:border-[6px] border-brand-beige dark:border-brand-borderDark dark:shadow-[0_0_40px_-10px_rgba(168,85,247,0.3)] shadow-xl group bg-white/50 dark:bg-brand-surface transition-all duration-500">
                     <img src="Media/Nijanthan-K.png" alt="Nijanthan" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
             </div>
@@ -234,44 +235,45 @@
 
                 <h3 class="text-xl font-bold mb-6 dark:text-white">Skills</h3>
                 
+                <!-- Glowing Skill Cards Grid -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     <!-- WordPress -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <i class="fab fa-wordpress text-4xl mb-3 text-brand-dark dark:text-purple-200 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">WordPress</span>
                     </div>
                     <!-- Elementor -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <i class="fab fa-elementor text-4xl mb-3 text-brand-dark dark:text-purple-200 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">Elementor</span>
                     </div>
                     <!-- WooCommerce -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <img src="Media/Woo_logo_color.png" alt="WooCommerce" class="woo-logo w-14 h-14 object-contain mb-3 group-hover:scale-110 transition-transform duration-300">
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">WooCommerce</span>
                     </div>
                     <!-- Shopify -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
-                        <img src="Media/shopify.png" alt="Shopify" class="woo-logo w-14 h-14 object-contain mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
+                        <img src="Media/shopify.svg" alt="Shopify" class="woo-logo w-14 h-14 object-contain mb-3 group-hover:scale-110 transition-transform duration-300">
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">Shopify</span>
                     </div>
                     <!-- Figma -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <i class="fab fa-figma text-4xl mb-3 text-brand-dark dark:text-purple-200 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">Figma</span>
                     </div>
                     <!-- HTML -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <i class="fab fa-html5 text-4xl mb-3 text-brand-dark dark:text-purple-200 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">HTML</span>
                     </div>
                     <!-- CSS -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <i class="fab fa-css3-alt text-4xl mb-3 text-brand-dark dark:text-purple-200 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">CSS</span>
                     </div>
                     <!-- JavaScript -->
-                    <div class="bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark hover:border-brand-dark/10 dark:hover:border-purple-400/40">
+                    <div class="glow-card bg-brand-beige dark:bg-brand-surfaceLight rounded-xl aspect-square flex flex-col items-center justify-center p-4 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-default group border border-transparent dark:border-brand-borderDark">
                         <i class="fab fa-js text-4xl mb-3 text-brand-dark dark:text-purple-200 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-center dark:text-purple-100">JavaScript</span>
                     </div>
@@ -337,23 +339,24 @@
                 </p>
             </div>
 
+            <!-- Glowing Feature Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-                <div class="bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up border border-transparent dark:border-brand-borderDark">
+                <div class="glow-card bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up border border-transparent dark:border-brand-borderDark hover:-translate-y-1.5 transition-all duration-300">
                     <span class="text-xs font-bold tracking-wider dark:text-brand-accent">01</span>
                     <h3 class="text-lg font-bold mt-6 mb-3 dark:text-white">WordPress Expertise</h3>
                     <p class="text-sm text-brand-dark/65 dark:text-purple-200/70 leading-relaxed">Hands-on experience with WordPress, Elementor, WooCommerce, ACF, themes, plugins and custom website solutions.</p>
                 </div>
-                <div class="bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up delay-100 border border-transparent dark:border-brand-borderDark">
+                <div class="glow-card bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up delay-100 border border-transparent dark:border-brand-borderDark hover:-translate-y-1.5 transition-all duration-300">
                     <span class="text-xs font-bold tracking-wider dark:text-brand-accent">02</span>
                     <h3 class="text-lg font-bold mt-6 mb-3 dark:text-white">Problem Solving</h3>
                     <p class="text-sm text-brand-dark/65 dark:text-purple-200/70 leading-relaxed">From plugin conflicts and responsive issues to hosting, DNS, migrations, and performance problems.</p>
                 </div>
-                <div class="bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up delay-200 border border-transparent dark:border-brand-borderDark">
+                <div class="glow-card bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up delay-200 border border-transparent dark:border-brand-borderDark hover:-translate-y-1.5 transition-all duration-300">
                     <span class="text-xs font-bold tracking-wider dark:text-brand-accent">03</span>
                     <h3 class="text-lg font-bold mt-6 mb-3 dark:text-white">Business Focused</h3>
                     <p class="text-sm text-brand-dark/65 dark:text-purple-200/70 leading-relaxed">I build with the goal in mind - whether that means generating enquiries, selling products or showcasing services.</p>
                 </div>
-                <div class="bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up delay-300 border border-transparent dark:border-brand-borderDark">
+                <div class="glow-card bg-brand-beige dark:bg-brand-surface rounded-2xl p-6 md:p-7 reveal-up delay-300 border border-transparent dark:border-brand-borderDark hover:-translate-y-1.5 transition-all duration-300">
                     <span class="text-xs font-bold tracking-wider dark:text-brand-accent">04</span>
                     <h3 class="text-lg font-bold mt-6 mb-3 dark:text-white">Ongoing Support</h3>
                     <p class="text-sm text-brand-dark/65 dark:text-purple-200/70 leading-relaxed">From launch to maintenance, I can help with updates, optimization, troubleshooting and future improvements.</p>
@@ -375,11 +378,11 @@
                 <div class="h-px bg-brand-dark/20 dark:bg-brand-borderDark flex-grow"></div>
             </div>
 
-            <!-- Portfolio Grid -->
+            <!-- Portfolio Grid with Border Illumination & Glow -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
                 
                 <!-- Project 1: Green Paradise TX -->
-                <a href="https://greenparadisetx.com/" target="_blank" rel="noopener noreferrer" class="reveal-up group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                <a href="https://greenparadisetx.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card-glow reveal-up group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
                     <img src="Media/Greenparadise.webp" alt="Green Paradise TX" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -390,7 +393,7 @@
                 </a>
                 
                 <!-- Project 2: The Door Fitting -->
-                <a href="https://thedoorfittingcompany.co.uk/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                <a href="https://thedoorfittingcompany.co.uk/" target="_blank" rel="noopener noreferrer" class="portfolio-card-glow reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
                     <img src="Media/The Door Fitting.png" alt="The Door Fitting" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -401,7 +404,7 @@
                 </a>
 
                 <!-- Project 3: Beau Rivage Bungalow -->
-                <a href="https://beaurivagebungalow.co.uk/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-200 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                <a href="https://beaurivagebungalow.co.uk/" target="_blank" rel="noopener noreferrer" class="portfolio-card-glow reveal-up delay-200 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
                     <img src="Media/Beau Rivage.png" alt="Beau Rivage Bungalow" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -412,7 +415,7 @@
                 </a>
 
                 <!-- Project 4: Valhalla Lanes -->
-                <a href="https://valhalla-lanes.co.uk/" target="_blank" rel="noopener noreferrer" class="reveal-up group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                <a href="https://valhalla-lanes.co.uk/" target="_blank" rel="noopener noreferrer" class="portfolio-card-glow reveal-up group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
                     <img src="Media/Valhalla Lanes.png" alt="Valhalla Lanes" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -423,7 +426,7 @@
                 </a>
 
                 <!-- Project 5: VIMS CBE -->
-                <a href="https://vimscbe.ac.in/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                <a href="https://vimscbe.ac.in/" target="_blank" rel="noopener noreferrer" class="portfolio-card-glow reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
                     <img src="Media/VIMS.png" alt="VIMS CBE" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -434,7 +437,7 @@
                 </a>
 
                 <!-- Project 6: Vellu Laser -->
-                <a href="https://lp.vellulaser.com/" target="_blank" rel="noopener noreferrer" class="reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
+                <a href="https://lp.vellulaser.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card-glow reveal-up delay-100 group relative overflow-hidden rounded-2xl bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block aspect-[4/3] md:aspect-auto md:h-72">
                     <img src="Media/Vellu Laser.png" alt="Vellu Laser" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -449,7 +452,7 @@
         </div>
     </section>
 
-    <!-- Footer / Contact Section (Dark themed in both modes) -->
+    <!-- Footer / Contact Section -->
     <footer id="contact" class="bg-brand-dark dark:bg-[#09060c] text-white pt-20 md:pt-24 pb-10 px-5 md:px-12 lg:px-24 relative overflow-hidden transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-white/10 pb-12 md:pb-16 mb-8 gap-12 reveal-up">
             
@@ -488,7 +491,7 @@
 
             <!-- Right CTA -->
             <div class="flex flex-col items-center gap-4 md:gap-6 w-full lg:w-auto mt-4 lg:mt-0">
-                <a href="https://wa.me/918220065541" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark rounded-full flex items-center justify-center text-brand-dark dark:text-purple-100 text-4xl md:text-5xl hover:scale-105 hover:bg-brand-purple dark:hover:bg-purple-900/40 transition-all shadow-xl shadow-black/20 group">
+                <a href="https://wa.me/918220065541" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-white dark:bg-brand-surfaceLight border border-transparent dark:border-brand-borderDark rounded-full flex items-center justify-center text-brand-dark dark:text-purple-100 text-4xl md:text-5xl hover:scale-105 hover:bg-brand-purple dark:hover:bg-purple-900/40 dark:hover:border-purple-400/50 dark:hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all shadow-xl shadow-black/20 group">
                     <i class="fas fa-arrow-right -rotate-45 group-hover:-translate-y-2 group-hover:translate-x-2 transition-transform duration-300"></i>
                 </a>
                 <p class="font-bold text-base md:text-lg text-brand-beige">👋 Let's Talk</p>
@@ -533,47 +536,7 @@
                 }
             });
 
-            // 3. Mobile Menu Toggle Logic
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const hamburgerIcon = document.getElementById('hamburger-icon');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            
-            let isMenuOpen = false;
-
-            function toggleMenu() {
-                isMenuOpen = !isMenuOpen;
-                
-                if(isMenuOpen) {
-                    mobileMenu.classList.remove('invisible');
-                    setTimeout(() => {
-                        mobileMenu.classList.remove('opacity-0');
-                    }, 10);
-                    
-                    hamburgerIcon.classList.remove('fa-bars');
-                    hamburgerIcon.classList.add('fa-times');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    mobileMenu.classList.add('opacity-0');
-                    setTimeout(() => {
-                        mobileMenu.classList.add('invisible');
-                    }, 300);
-                    
-                    hamburgerIcon.classList.remove('fa-times');
-                    hamburgerIcon.classList.add('fa-bars');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            hamburgerBtn.addEventListener('click', toggleMenu);
-            
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if(isMenuOpen) toggleMenu();
-                });
-            });
-
-            // 4. Scroll Animations (Intersection Observer)
+            // 3. Scroll Animations (Intersection Observer)
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
